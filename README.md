@@ -1,56 +1,47 @@
-# Welcome to your Expo app 👋
+# Bluetooth_Hat
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+แอป React Native/Expo สำหรับงาน Bluetooth Low Energy (BLE) ที่เชื่อมต่อกับอุปกรณ์ของรายวิชา แล้วทำขั้นตอน:
 
-## Get started
+1. อ่านค่า Characteristic ครั้งแรก
+2. เขียนชื่อผู้ใช้และเพื่อนลงใน Characteristic
+3. อ่านค่าอีกครั้งเพื่อรับผลทำนายเกรด
 
-1. Install dependencies
+## Target UUIDs
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+SERVICE_UUID = aee04821-1973-4e1f-a590-e84b10d580e7
+CHAR_UUID    = cde07b1a-889b-44b7-a99f-c888dddac729
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Features
 
-### Other setup steps
+- สแกนอุปกรณ์ BLE ทุกตัวในระยะ
+- จัดอุปกรณ์ที่ประกาศ Service UUID เป้าหมายไว้บนสุด
+- กรองรายการเป็น Target หรือ All และค้นหาจากชื่อ/Device ID
+- ตรวจ Service และ Characteristic หลังเชื่อมต่อ
+- ขั้นตอน Read -> Write -> Read สำหรับงานทำนายเกรด
+- แสดงสถานะสแกน กำลังเชื่อมต่อ และเชื่อมต่อสำเร็จ
+- เปลี่ยนภาษาไทย/อังกฤษได้
+- ธีมหมวกพยากรณ์เกรด
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Install
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+โปรเจกต์ใช้ `react-native-ble-plx` ซึ่งเป็น native module จึงต้องใช้งานผ่าน development build หรือ APK ที่ build ด้วย EAS
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Development
 
-## Join the community
+```bash
+npx expo start --dev-client
+```
 
-Join our community of developers creating universal apps.
+## Android Preview APK
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npx eas-cli@latest build --platform android --profile preview
+```
+
+โปรเจกต์นี้พัฒนาต่อจากตัวอย่าง [soradech/scan-ble](https://github.com/soradech/scan-ble)
